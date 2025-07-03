@@ -4,7 +4,13 @@ const { Duck } = require("../database");
 
 // GET all ducks
 router.get("/", async (req, res) => {
-  res.sendStatus(501);
+  try {
+    const ducks = await Duck.findAll();
+    res.send(ducks);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 });
 
 module.exports = router;
